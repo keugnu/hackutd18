@@ -40,12 +40,13 @@
 
       var newMeme = document.createElement("img");
       newMeme.src = url_source;
-      newMeme.setAttribute("width", "90\%");
+      newMeme.setAttribute("width", "100\%");
       newMeme.setAttribute("height", "auto");
 
       var newAuthor = document.createElement("div");
       newAuthor.setAttribute("class", "author");
       var authorText = document.createTextNode(author);
+      newAuthor.setAttribute("font-family", '"Arial Black", Gadget, sans-serif')
       newAuthor.appendChild(authorText)
 
       newMessage.appendChild(newAuthor);
@@ -98,11 +99,8 @@
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
   <style type="text/css">
-    * { -webkit-box-sizing: border-box; }
-
     .container {
       max-width: 80%;
-      max-height: 70%;
       margin: 3% auto;
 /*      border: solid 1px #ccc; */
       border-radius: 1vh;
@@ -111,23 +109,26 @@
 
     .chat-container {
       float: right;
-      max-width: 80%;
+      max-width: 60%;
+      min-width: 60%;
       height: 70vh;
       overflow: auto;
       direction: rtl;
     }
 
+    /*
     .meme-container {
       float: left;
-      max-width: 5%;
+      max-width: 35%;
       height: 70vh;
-      overflow: auto;
+      overflow: hidden;
       direction: rtl;
     }
+    */
 
     .chat-container .message {
       /* border-bottom: solid 1px #ccc; */
-      padding: 5vh;
+      padding: 3vh;
       direction: rtl;
     }
 
@@ -145,22 +146,11 @@
     }
 
     .chat-footer {
-      position: fixed;
+      padding-right: 3vh;
+/*      position: fixed;
       bottom: 10%;
-      width: 80%;
-      right: 10%;
+      width: 80%; */
     }
-
-    /* To-delete */
-    /*
-    .media-list {
-      max-width: 80%;
-      margin: 3% auto;
-      border: solid 1px #ccc;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-    */
   </style>
 </head>
 
@@ -175,8 +165,8 @@
     <div class="chat-container">
     </div>  
 
-    <div class="meme-container">
-    </div>
+    <!-- <div class="meme-container">
+    </div> -->
 
     <div class="chat-footer">
       <div class="input-group">
