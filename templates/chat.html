@@ -46,7 +46,6 @@
       var newAuthor = document.createElement("div");
       newAuthor.setAttribute("class", "author");
       var authorText = document.createTextNode(author);
-      newAuthor.setAttribute("font-family", '"Arial Black", Gadget, sans-serif')
       newAuthor.appendChild(authorText)
 
       newMessage.appendChild(newAuthor);
@@ -57,6 +56,10 @@
 
     function refreshMessages(message) {
       add_div(message.data.message, message.data.author);
+
+      container = $('.chat-container');
+      container[0].scrollTop = container[0].scrollHeight;
+      container.animate({ scrollTop: container[0].scrollHeight }, "slow");
     }
 
     $(function () {
@@ -71,7 +74,6 @@
 
       function sendMessage() {
         container = $('.chat-container');
-        container[0].scrollTop = container[0].scrollHeight;
 
         var message = $("#messageText").val();
         var search_term = message.replace(/ /g,"+");
@@ -87,6 +89,8 @@
         });
 
         $("#messageText").val("");
+
+        container[0].scrollTop = container[0].scrollHeight;
         container.animate({ scrollTop: container[0].scrollHeight }, "slow");
       }
     })
