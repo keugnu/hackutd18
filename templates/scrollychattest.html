@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+
+  <script src="//code.jquery.com/jquery-1.11.1.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <style type="text/css"> 
+    * { -webkit-box-sizing: border-box; }
+
+    .container {
+      max-width: 80%;
+      margin: 3% auto;
+      border: solid 1px #ccc;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .chat-container {
+      max-width: 100%;
+      height: 70vh;
+      overflow: auto;
+      -webkit-transform: rotate(180deg);
+      direction: rtl;
+    }
+
+    .chat-container .message {
+      border-bottom: solid 1px #ccc;
+      padding: 20px;
+      -webkit-transform: rotate(180deg);
+              transform: rotate(180deg);
+      direction: ltr;
+    }
+    
+    .chat-container .message .meme {
+      float: center;
+      margin-right: auto;
+    }
+
+    .chat-container .message .datetime {
+      float: right;
+      color: #999;
+    }
+
+    .send-message-form input {
+      width: 100%;
+      border: none;
+      font-size: 1.25em;
+      padding: 1%;
+    }
+
+    .send-message-form button {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="chat-container">
+    <div class="message">
+      <img class="meme" src="https://media3.giphy.com/media/26DMXdbd3vEPtno1G/giphy.gif">
+      <div class="datetime">24/02/2018 6:18</div>
+    </div>
+
+    <div class="message">
+      <img class="meme" src="https://media.giphy.com/media/3op5Txe6mc36sGbwOs/giphy.gif">
+      <div class="datetime">24/02/2018 6:18</div>
+    </div>
+
+    <div class="message">
+      <img class="meme" src="https://media.giphy.com/media/5Ynni4pZUNrfJA1Rob/giphy.gif">
+      <div class="datetime">24/02/2018 6:18</div>
+    </div>
+
+    <div class="message">
+      <img class="meme" src="https://media.giphy.com/media/3ohzAfsCBlHEMVyOtO/giphy.gif">
+      <div class="datetime">24/02/2018 6:18</div>
+    </div>
+
+    <div class="message">
+      <img class="meme" src="https://media.giphy.com/media/2rAKLJxLnmfVoFljAf/giphy.gif">
+      <div class="datetime">24/02/2018 6:18</div>
+    </div>
+
+    <div class="message">
+      <img class="meme" src="https://media.giphy.com/media/XIqCQx02E1U9W/giphy.gif">
+      <div class="datetime">24/02/2018 6:18</div>
+    </div>
+
+    <div class="message">
+      <img class="meme" src="https://media.giphy.com/media/l4Jz3a8jO92crUlWM/giphy.gif">
+      <div class="datetime">24/02/2018 6:18</div>
+    </div>
+
+    <div class="message">
+      <img class="meme" src="https://media3.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+      <div class="datetime">24/02/2018 6:18</div>
+    </div>
+
+    <div class="message">
+      <img class="meme" src="https://media0.giphy.com/media/vFKqnCdLPNOKc/giphy.gif">
+      <div class="datetime">24/02/2018 6:18</div>
+    </div>
+  </div>
+
+  <form class="send-message-form">
+    <input type="text" placeholder="Your message">
+  </form>
+</div>
+
+</body>
+
+</html>
