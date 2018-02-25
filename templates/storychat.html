@@ -28,7 +28,7 @@
     });
 
     function add_div(url_source, author, time) {
-      var chat_list = document.getElementsByClassName("chat-container")[0];
+      var chat_list = document.getElementsByClassName("meme-container")[0];
 
       var newMessage = document.createElement("div");
       newMessage.setAttribute("class", "message");
@@ -40,13 +40,10 @@
 
       var newMeme = document.createElement("img");
       newMeme.src = url_source;
-      newMeme.setAttribute("width", "100\%");
-      newMeme.setAttribute("height", "auto");
 
       var newAuthor = document.createElement("div");
       newAuthor.setAttribute("class", "author");
       var authorText = document.createTextNode(author);
-      newAuthor.setAttribute("font-family", '"Arial Black", Gadget, sans-serif')
       newAuthor.appendChild(authorText)
 
       newMessage.appendChild(newAuthor);
@@ -56,7 +53,19 @@
     }
 
     function refreshMessages(message) {
-      add_div(message.data.message, message.data.author);
+      var api_key = "api_key=9710vZqphVyMlxAytAM1S6XWrvRWTdBx";
+
+      var search_term = message.data.message.replace(/ /g,"+");
+      var link = "http://api.giphy.com/v1/gifs/translate?s=" + search_term + "&" + api_key;
+
+      var xhr = $.get(link);
+      xhr.done(function(data) {
+        add_div(data["data"]["images"]["fixed_height"]["url"], message.data.author, "12:44");
+
+        var container = $('.meme-container');
+        container[0].scrollTop = container[0].scrollHeight;
+        container.animate({ scrollTop: container[0].scrollHeight }, "slow");
+      });
     }
 
     $(function () {
@@ -70,24 +79,15 @@
       }
 
       function sendMessage() {
-        container = $('.chat-container');
+        container = $('.meme-container');
         container[0].scrollTop = container[0].scrollHeight;
 
         var message = $("#messageText").val();
-        var search_term = message.replace(/ /g,"+");
-        var api_key = "api_key=9710vZqphVyMlxAytAM1S6XWrvRWTdBx";
-        var link = "https://api.giphy.com/v1/gifs/search?" + api_key + "&q=" + search_term + "&limit=10&offset=0&rating=PG-13&lang=en";
-
-        var xhr = $.get(link);
-        xhr.done(function(data) {
-          var rand = Math.floor(Math.random() * 10);
-          message = data["data"][[rand]]["images"]["fixed_height"]["url"];
-          var author = $.cookie("realtime-chat-nickname");
-          socket.emit('message', { data: { message: message, author: author } });
-        });
-
+        var author = $.cookie("realtime-chat-nickname");
+        
+        socket.emit('message', { data: { message: message, author: author } });
         $("#messageText").val("");
-        container.animate({ scrollTop: container[0].scrollHeight }, "slow");
+//        container.animate({ scrollTop: container[0].scrollHeight }, "slow");
       }
     })
   </script>
@@ -104,40 +104,55 @@
       overflow: hidden;
     }
 
-    .chat-container {
+    .meme-container {
       float: right;
-      max-width: 60%;
-      min-width: 60%;
+      max-width: 50%;
       height: 70vh;
-      overflow: auto;
-      direction: ltr;
-    }
-
-    .chat-container .message {
-      /* border-bottom: solid 1px #ccc; */
-      padding: 3vh;
+      overflow: hidden;
       direction: rtl;
     }
 
-    .chat-container .message .meme {
+    .chat-container {
+      float: left;
+      max-width: 50%;
+      height: 70vh;
+      overflow: hidden;
+      direction: ltr;
+    }
+
+    .meme-container .message {
+      /* border-bottom: solid 1px #ccc; */
+      padding: 5vh;
+      direction: rtl;
+    }
+
+    .meme-container .message .meme {
     }
 
     /*
-    .chat-container .message .time {
+    .meme-container .message .time {
       color: #999;
       margin-right: 1vh;
     }
     */
 
-    .chat-container .message .author {
+    .meme-container .message .author {
     }
 
     .chat-footer {
-      padding-right: 3vh;
-/*      position: fixed;
-      bottom: 10%;
-      width: 80%; */
+      float: auto;
     }
+
+    /* To-delete */
+    /*
+    .media-list {
+      max-width: 80%;
+      margin: 3% auto;
+      border: solid 1px #ccc;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    */
   </style>
 </head>
 
@@ -145,23 +160,15 @@
   <div class="container">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <strong><span class="glyphicon glyphicon-list"></span> GiphyChat</strong>
+        <strong><span class="glyphicon glyphicon-list"></span> Chat</strong>
       </div>
     </div>
 
     <div class="chat-container">
-
-    <!--
-      <div class="chat-header panel-body">
-        <ul class="media-list">
-        </ul>
-      </div>
-    -->
-
     </div>
 
-    <!-- <div class="meme-container">
-    </div> -->
+    <div class="meme-container">
+    </div>  
 
     <div class="chat-footer">
       <div class="input-group">
