@@ -91,11 +91,12 @@
         var message = $("#messageText").val();
         var search_term = message.replace(/ /g,"+");
         var api_key = "api_key=9710vZqphVyMlxAytAM1S6XWrvRWTdBx";
-        var link = "http://api.giphy.com/v1/gifs/translate?s=" + search_term + "&" + api_key;
+        var link = "https://api.giphy.com/v1/gifs/search?" + api_key + "&q=" + search_term + "&limit=10&offset=0&rating=PG-13&lang=en";
 
         var xhr = $.get(link);
         xhr.done(function(data) {
-          message = data["data"]["images"]["fixed_height"]["url"];
+          var rand = Math.floor(Math.random() * 10);
+          message = data["data"][[rand]]["images"]["fixed_height"]["url"];
           var author = $.cookie("realtime-chat-nickname");
           socket.emit('message', { data: { message: message, author: author } });
         });
