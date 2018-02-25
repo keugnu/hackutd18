@@ -69,10 +69,7 @@
 
         var xhr = $.get(link);
         xhr.done(function(data) {
-          //message = data["data"][getRandomInt()]["images"]["fixed_height"]["url"];
           var rand = Math.floor(Math.random() * 10);
-          console.log(data["data"]);
-          console.log(rand);
           message = data["data"][[rand]]["images"]["fixed_height"]["url"];
           var author = $.cookie("realtime-chat-nickname");
           socket.emit('message', { data: { message: message, author: author } });
