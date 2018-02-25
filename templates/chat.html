@@ -55,23 +55,7 @@
     }
 
     function refreshMessages(message) {
-
-        add_div(message.data.message, message.data.author, "12:44");
-
-      var api_key = "api_key=9710vZqphVyMlxAytAM1S6XWrvRWTdBx";
-
-      var search_term = message.data.message.replace(/ /g,"+");
-      var link = "http://api.giphy.com/v1/gifs/translate?s=" + search_term + "&" + api_key;
-
-      var xhr = $.get(link);
-      xhr.done(function(data) {
-        add_div(data["data"]["images"]["fixed_height"]["url"], message.data.author, "12:44");
-
-        var container = $('.chat-container');
-        container[0].scrollTop = container[0].scrollHeight;
-        container.animate({ scrollTop: container[0].scrollHeight }, "slow");
-      });
-
+      add_div(message.data.message, message.data.author);
     }
 
     $(function () {
@@ -102,7 +86,7 @@
         });
 
         $("#messageText").val("");
-//        container.animate({ scrollTop: container[0].scrollHeight }, "slow");
+        container.animate({ scrollTop: container[0].scrollHeight }, "slow");
       }
     })
   </script>
@@ -127,7 +111,7 @@
       max-width: 80%;
       height: 70vh;
       overflow: auto;
-      direction: rtl;
+      direction: ltr;
     }
 
     .meme-container {
@@ -135,13 +119,13 @@
       max-width: 5%;
       height: 70vh;
       overflow: auto;
-      direction: rtl;
+      direction: ltr;
     }
 
     .chat-container .message {
       /* border-bottom: solid 1px #ccc; */
       padding: 5vh;
-      direction: rtl;
+      direction: ltr;
     }
 
     .chat-container .message .meme {
