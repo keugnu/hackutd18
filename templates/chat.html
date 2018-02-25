@@ -45,15 +45,7 @@
     }
 
     function refreshMessages(message) {
-      var api_key = "api_key=9710vZqphVyMlxAytAM1S6XWrvRWTdBx";
-
-      var search_term = message.data.message.replace(/ /g,"+");
-      var link = "http://api.giphy.com/v1/gifs/translate?s=" + search_term + "&" + api_key;
-
-      var xhr = $.get(link);
-      xhr.done(function(data) {
-        add_div(data["data"]["images"]["fixed_height"]["url"], message.data.author, "12:44");
-      });
+        add_div(message.data.message, message.data.author, "12:44");
     }
 
     $(function () {
@@ -71,9 +63,17 @@
         container[0].scrollTop = container[0].scrollHeight;
 
         var message = $("#messageText").val();
-        var author = $.cookie("realtime-chat-nickname");
-        
-        socket.emit('message', { data: { message: message, author: author } });
+        var search_term = message.replace(/ /g,"+");
+        var api_key = "api_key=9710vZqphVyMlxAytAM1S6XWrvRWTdBx";
+        var link = "http://api.giphy.com/v1/gifs/translate?s=" + search_term + "&" + api_key;
+
+        var xhr = $.get(link);
+        xhr.done(function(data) {
+          message = data["data"]["images"]["fixed_height"]["url"];
+          var author = $.cookie("realtime-chat-nickname");
+          socket.emit('message', { data: { message: message, author: author } });
+        });
+
         $("#messageText").val("");
         container.animate({ scrollTop: container[0].scrollHeight }, "slow");
       }
@@ -152,8 +152,8 @@
         </ul>
       </div>
     -->
-      
-    </div>  
+
+    </div>
 
     <div class="chat-footer">
       <div class="input-group">
