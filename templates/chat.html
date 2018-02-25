@@ -3,7 +3,7 @@
 
 <head lang="en">
   <meta charset="UTF-8">
-  <title></title>
+  <title>Giphychat</title>
 
   <script src="//code.jquery.com/jquery-1.11.1.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -33,14 +33,24 @@
       var newMessage = document.createElement("div");
       newMessage.setAttribute("class", "message");
 
-      var newTime = document.createElement("div");
-      newTime.setAttribute("class", "time");
+      //var newTime = document.createElement("div");
+      //newTime.setAttribute("class", "time");
+      //var timeText = document.createTextNode(":" + time);
+      //newTime.appendChild(timeText);
 
       var newMeme = document.createElement("img");
       newMeme.src = url_source;
+      newMeme.setAttribute("width", "100\%");
+      newMeme.setAttribute("height", "auto");
 
+      var newAuthor = document.createElement("div");
+      newAuthor.setAttribute("class", "author");
+      var authorText = document.createTextNode(author);
+      newAuthor.appendChild(authorText)
+
+      newMessage.appendChild(newAuthor);
       newMessage.appendChild(newMeme);
-      newMessage.appendChild(newTime);
+      //newMessage.appendChild(newTime);
       chat_list.appendChild(newMessage);
     }
 
@@ -53,6 +63,10 @@
       var xhr = $.get(link);
       xhr.done(function(data) {
         add_div(data["data"]["images"]["fixed_height"]["url"], message.data.author, "12:44");
+
+        var container = $('.chat-container');
+        container[0].scrollTop = container[0].scrollHeight;
+        container.animate({ scrollTop: container[0].scrollHeight }, "slow");
       });
     }
 
@@ -75,7 +89,7 @@
         
         socket.emit('message', { data: { message: message, author: author } });
         $("#messageText").val("");
-        container.animate({ scrollTop: container[0].scrollHeight }, "slow");
+//        container.animate({ scrollTop: container[0].scrollHeight }, "slow");
       }
     })
   </script>
@@ -88,12 +102,13 @@
       max-width: 80%;
       margin: 3% auto;
 /*      border: solid 1px #ccc; */
-      border-radius: 5px;
+      border-radius: 1vh;
       overflow: hidden;
     }
 
     .chat-container {
-      max-width: 100%;
+      float: right;
+      max-width: 65%;
       height: 70vh;
       overflow: auto;
       direction: rtl;
@@ -101,27 +116,24 @@
 
     .chat-container .message {
       /* border-bottom: solid 1px #ccc; */
-      padding: 20px;
+      padding: 5vh;
       direction: rtl;
     }
 
     .chat-container .message .meme {
-      float: center;
-      margin-right: auto;
     }
 
+    /*
     .chat-container .message .time {
-      float: right;
       color: #999;
+      margin-right: 1vh;
     }
+    */
 
     .chat-container .message .author {
-
     }
 
-    .chat-container .chat-footer {
-
-    }
+    .chat-container .chat-footer {}
 
     /* To-delete */
     /*
@@ -136,7 +148,7 @@
   </style>
 </head>
 
-<body>
+<body scroll="no">
   <div class="container">
     <div class="panel panel-info">
       <div class="panel-heading">
@@ -145,14 +157,6 @@
     </div>
 
     <div class="chat-container">
-
-    <!--
-      <div class="chat-header panel-body">
-        <ul class="media-list">
-        </ul>
-      </div>
-    -->
-      
     </div>  
 
     <div class="chat-footer">
