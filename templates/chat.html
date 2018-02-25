@@ -40,7 +40,7 @@
 
       var newMeme = document.createElement("img");
       newMeme.src = url_source;
-      newMeme.setAttribute("width", "90\%");
+      newMeme.setAttribute("width", "100\%");
       newMeme.setAttribute("height", "auto");
 
       var newAuthor = document.createElement("div");
@@ -55,23 +55,11 @@
     }
 
     function refreshMessages(message) {
+      add_div(message.data.message, message.data.author);
 
-        add_div(message.data.message, message.data.author, "12:44");
-
-      var api_key = "api_key=9710vZqphVyMlxAytAM1S6XWrvRWTdBx";
-
-      var search_term = message.data.message.replace(/ /g,"+");
-      var link = "http://api.giphy.com/v1/gifs/translate?s=" + search_term + "&" + api_key;
-
-      var xhr = $.get(link);
-      xhr.done(function(data) {
-        add_div(data["data"]["images"]["fixed_height"]["url"], message.data.author, "12:44");
-
-        var container = $('.chat-container');
-        container[0].scrollTop = container[0].scrollHeight;
-        container.animate({ scrollTop: container[0].scrollHeight }, "slow");
-      });
-
+      container = $('.chat-container');
+      container[0].scrollTop = container[0].scrollHeight;
+      container.animate({ scrollTop: container[0].scrollHeight }, "slow");
     }
 
     $(function () {
@@ -86,7 +74,6 @@
 
       function sendMessage() {
         container = $('.chat-container');
-        container[0].scrollTop = container[0].scrollHeight;
 
         var message = $("#messageText").val();
         var search_term = message.replace(/ /g,"+");
@@ -102,7 +89,9 @@
         });
 
         $("#messageText").val("");
-//        container.animate({ scrollTop: container[0].scrollHeight }, "slow");
+
+        container[0].scrollTop = container[0].scrollHeight;
+        container.animate({ scrollTop: container[0].scrollHeight }, "slow");
       }
     })
   </script>
@@ -111,11 +100,8 @@
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
   <style type="text/css">
-    * { -webkit-box-sizing: border-box; }
-
     .container {
       max-width: 80%;
-      max-height: 70%;
       margin: 3% auto;
 /*      border: solid 1px #ccc; */
       border-radius: 1vh;
@@ -124,23 +110,16 @@
 
     .chat-container {
       float: right;
-      max-width: 80%;
+      max-width: 60%;
+      min-width: 60%;
       height: 70vh;
       overflow: auto;
-      direction: rtl;
-    }
-
-    .meme-container {
-      float: left;
-      max-width: 5%;
-      height: 70vh;
-      overflow: auto;
-      direction: rtl;
+      direction: ltr;
     }
 
     .chat-container .message {
       /* border-bottom: solid 1px #ccc; */
-      padding: 5vh;
+      padding: 3vh;
       direction: rtl;
     }
 
@@ -158,22 +137,11 @@
     }
 
     .chat-footer {
-      position: fixed;
+      padding-right: 3vh;
+/*      position: fixed;
       bottom: 10%;
-      width: 80%;
-      right: 10%;
+      width: 80%; */
     }
-
-    /* To-delete */
-    /*
-    .media-list {
-      max-width: 80%;
-      margin: 3% auto;
-      border: solid 1px #ccc;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-    */
   </style>
 </head>
 
@@ -196,8 +164,8 @@
 
     </div>
 
-    <div class="meme-container">
-    </div>
+    <!-- <div class="meme-container">
+    </div> -->
 
     <div class="chat-footer">
       <div class="input-group">
