@@ -77,7 +77,7 @@
 
         var message = $("#messageText").val();
         var search_term = message.replace(/ /g,"+");
-        var api_key = "api_key=9710vZqphVyMlxAytAM1S6XWrvRWTdBx";
+        var api_key = "api_key=";
         var link = "https://api.giphy.com/v1/gifs/search?" + api_key + "&q=" + search_term + "&limit=10&offset=0&rating=PG-13&lang=en";
 
         var xhr = $.get(link);
